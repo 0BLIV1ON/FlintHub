@@ -6,7 +6,7 @@ if table.find(allowedGameIds, game.PlaceId) then
     -- Get the Library (using loadstring as per the README)
     local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 
-    -- Create the GUI (as per the README example)
+    -- Create the GUI
     local GUI = Mercury:Create{
         Name = "Flint Hub",
         Size = UDim2.fromOffset(600, 400),
