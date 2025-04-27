@@ -12,7 +12,7 @@ if table.find(allowedGameIds, game.PlaceId) then
     local GUI = Mercury:Create{
         Name = "Flint Hub",
         Size = UDim2.fromOffset(600, 400),
-        Theme = Mercury.Themes.Dark,
+        Theme = Mercury.Theme.Dark, -- Corrected line
         Link = "https://github.com/deeeity/mercury-lib"
     }
 
@@ -111,7 +111,7 @@ if table.find(allowedGameIds, game.PlaceId) then
             GUI = Mercury:Create{
                 Name = "Flint Hub",
                 Size = UDim2.fromOffset(600, 400),
-                Theme = Mercury.Themes.Dark,
+                Theme = Mercury.Theme.Dark, -- Corrected line
                 Link = "https://github.com/deeeity/mercury-lib"
             }
 
