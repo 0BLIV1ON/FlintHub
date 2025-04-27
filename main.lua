@@ -56,11 +56,26 @@ if table.find(allowedGameIds, game.PlaceId) then
     -- Add a keybind to toggle the GUI visibility
     local UserInputService = game:GetService("UserInputService")
     local guiVisible = true  -- Track the GUI's visibility
+    local toggleKey = Enum.KeyCode.LeftControl  -- Default to LeftControl, make it customizable
+
+    -- You could add a setting in your GUI to change 'toggleKey'
+    -- For simplicity, we'll just define it here.  In a real GUI,
+    -- you'd have a way for the user to select the key.
+    local function setToggleKey(newKey)
+        if Enum.KeyCode[newKey] then --validate the new key
+            toggleKey = Enum.KeyCode[newKey]
+        else
+            warn("Invalid KeyCode provided for toggle key")
+        end
+    end
+
+    -- Example of setting it to LeftControl
+    setToggleKey("LeftControl") --<--- Here is where you set the key.
 
     UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
         if gameProcessedEvent then return end  -- Don't process if the game already handled it
 
-        if input.KeyCode == Enum.KeyCode.RightShift then  -- Use RightShift as the toggle key
+        if input.KeyCode == toggleKey then  -- Use the customizable toggleKey
             guiVisible = not guiVisible  -- Toggle the visibility
             GUI:SetVisible(guiVisible)  -- Use the appropriate method to show/hide the GUI
             if guiVisible then
