@@ -9,7 +9,7 @@ Once the script is set up, the UI will automatically appear when a player joins 
 
 ## Loadstring
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/0BLIV1ON/FlintHub/refs/heads/main/main.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/0BLIV1ON/FlintHub/refs/heads/main/latest.lua"))()
 ```
 
 ## Issues
