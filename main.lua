@@ -74,6 +74,28 @@ if table.find(allowedGameIds, game.PlaceId) then
             end
         end
     }
+
+    -- Add a button to run the ESP script.
+    MainTab:Button{
+        Name = "ESP",
+        Description = "Runs ESP script by 0BLIV1ON",
+        Callback = function()
+            local espScriptURL = "https://raw.githubusercontent.com/0BLIV1ON/esp/refs/heads/main/main.lua"
+            local success, result = pcall(function()
+                return loadstring(game:HttpGet(espScriptURL))()
+            end)
+            if success then
+                -- The script was loaded and executed successfully.
+                if type(result) == "function" then
+                    pcall(result) -- Execute the function
+                else
+                    warn("ESP script loaded, but didn't return a function. Returned: ", result)
+                end
+            else
+                warn("Error loading or running ESP script from ", espScriptURL, ": ", result)
+            end
+        end
+    }
 else
     -- This game is not supported.
     warn("This game (" .. game.PlaceId .. ") is not in the allowed list.")
