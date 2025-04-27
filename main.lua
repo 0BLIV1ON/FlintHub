@@ -1,7 +1,6 @@
 local allowedGameIds = {482742811, 123456789, 987654321}
 
 if table.find(allowedGameIds, game.PlaceId) then
-
     -- Get the Library
     local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 
@@ -16,10 +15,10 @@ if table.find(allowedGameIds, game.PlaceId) then
     -- Create a Tab
     local MainTab = GUI:Tab{
         Name = "Main",
-        Icon = "rbxassetid://8569322835" -- Replace with a suitable icon
+        Icon = "rbxassetid://8569322835"  -- Replace with a suitable icon
     }
 
-    -- Use Mercury Lib's Notification
+    -- Notification
     GUI:Notification{
         Title = "🎉 Supported Game! 🎉",
         Text = "",
@@ -28,25 +27,21 @@ if table.find(allowedGameIds, game.PlaceId) then
         end
     }
 
-    -- Add a button to run the external script
+    -- Run nameless admin
     MainTab:Button{
         Name = "Nameless Admin",
         Description = "Runs Nameless Admin by ltseverydayyou",
         Callback = function()
-            local success, script = pcall(game:HttpGet, "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua")
-            if success then
-                local loadSuccess, func = pcall(loadstring, script)
-                if loadSuccess and func then
-                    func() -- Execute the loaded script
-                else
-                    warn("Error loading admin script:", loadSuccess)
-                end
+            local success, func = pcall(function()
+                return loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"))()
+            end)
+            if success and func then
+                -- The script was loaded and executed successfully.
             else
-                warn("Error getting admin script:", success)
+                warn("Error loading or running admin script:", func)
             end
         end
     }
-
 else
     -- This game is not supported.
     warn("This game (" .. game.PlaceId .. ") is not in the allowed list.")
