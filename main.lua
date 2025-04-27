@@ -75,24 +75,27 @@ if table.find(allowedGameIds, game.PlaceId) then
         end
     }
 
-    -- Add a button to run the ESP script.
+    -- Add a button to run the ESP script.  Modified for better error handling.
     MainTab:Button{
         Name = "ESP",
         Description = "Runs ESP script by 0BLIV1ON",
         Callback = function()
             local espScriptURL = "https://raw.githubusercontent.com/0BLIV1ON/esp/refs/heads/main/main.lua"
-            local success, result = pcall(function()
-                return loadstring(game:HttpGet(espScriptURL))()
-            end)
-            if success then
-                -- The script was loaded and executed successfully.
-                if type(result) == "function" then
-                    pcall(result) -- Execute the function
+            local getSuccess, espScript = pcall(game.HttpGet, espScriptURL) -- Fetch
+            if getSuccess then
+                local loadSuccess, espFunc = pcall(loadstring, espScript) -- Load
+                if loadSuccess then
+                    local runSuccess, runResult = pcall(espFunc)       -- Run
+                    if runSuccess then
+                         -- success
+                    else
+                        warn("Error running ESP script:", runResult)
+                    end
                 else
-                    warn("ESP script loaded, but didn't return a function. Returned: ", result)
+                    warn("Error loading ESP script:", espFunc)
                 end
             else
-                warn("Error loading or running ESP script from ", espScriptURL, ": ", result)
+                warn("Error getting ESP script from", espScriptURL, ":", espScript)
             end
         end
     }
