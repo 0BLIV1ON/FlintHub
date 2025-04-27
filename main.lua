@@ -1,7 +1,6 @@
 local allowedGameIds = {482742811, 123456789, 987654321}
 
 if table.find(allowedGameIds, game.PlaceId) then
-    -- This game is supported, so the following scripts will run.
 
     -- Get the Library
     local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
