@@ -34,7 +34,7 @@ if table.find(allowedGameIds, game.PlaceId) then
     -- Add a button to run the external script DIRECTLY
     MainTab:Button{
         Name = "Nameless Admin",
-        Description = "Run Nameless Admin",
+        Description = "Runs Nameless Admin by ltseverydayyou",
         Callback = function()
             local adminScriptURL = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"
             local success, result = pcall(function()
@@ -52,6 +52,24 @@ if table.find(allowedGameIds, game.PlaceId) then
             end
         end
     }
+
+    -- Add a keybind to toggle the GUI visibility
+    local UserInputService = game:GetService("UserInputService")
+    local guiVisible = true  -- Track the GUI's visibility
+
+    UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+        if gameProcessedEvent then return end  -- Don't process if the game already handled it
+
+        if input.KeyCode == Enum.KeyCode.RightShift then  -- Use RightShift as the toggle key
+            guiVisible = not guiVisible  -- Toggle the visibility
+            GUI:SetVisible(guiVisible)  -- Use the appropriate method to show/hide the GUI
+            if guiVisible then
+                GUI:Notification{Title = "GUI Visible", Text = "Flint Hub is now visible.", Duration = 2}
+            else
+                GUI:Notification{Title = "GUI Hidden", Text = "Flint Hub is now hidden.", Duration = 2}
+            end
+        end
+    end)
 else
     -- This game is not supported.
     warn("This game (" .. game.PlaceId .. ") is not in the allowed list.")
