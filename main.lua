@@ -29,7 +29,7 @@ if table.find(allowedGameIds, game.PlaceId) then
 
     MainTab:Button{
         Name = "Nameless Admin",
-        Description = "Run Nameless Admin",
+        Description = "",
         Callback = function()
             local adminScriptURL = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"
             local success, result = pcall(function()
