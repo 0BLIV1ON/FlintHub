@@ -34,7 +34,7 @@ if table.find(allowedGameIds, game.PlaceId) then
     -- Add a button to run the external script DIRECTLY
     MainTab:Button{
         Name = "Nameless Admin",
-        Description = "Runs Nameless Admin by ltseverydayyou",
+        Description = "Run Nameless Admin",
         Callback = function()
             local adminScriptURL = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"
             local success, result = pcall(function()
