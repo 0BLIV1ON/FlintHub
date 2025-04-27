@@ -54,7 +54,7 @@ if table.find(allowedGameIds, game.PlaceId) then
     -- Add a button to run the external script DIRECTLY
     MainTab:Button{
         Name = "Nameless Admin",
-        Description = "Run Nameless Admin",
+        Description = "Runs Nameless Admin by ltseverydayyou",
         Callback = function()
             local adminScriptURL = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"
             loadAndRunScript(adminScriptURL, "Nameless Admin")
@@ -64,7 +64,7 @@ if table.find(allowedGameIds, game.PlaceId) then
     -- Add another button to run Infinite Yield
     MainTab:Button{
         Name = "Infinite Yield",
-        Description = "Run Infinite Yield",
+        Description = "Runs Infinite Yield by EdgeIY",
         Callback = function()
             local infiniteYieldURL = "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"
             loadAndRunScript(infiniteYieldURL, "Infinite Yield")
@@ -74,7 +74,7 @@ if table.find(allowedGameIds, game.PlaceId) then
     -- Add a button to run the ESP script.
     MainTab:Button{
         Name = "ESP",
-        Description = "Run ESP (tracers and boxes)",
+        Description = "Runs ESP script by 0BLIV1ON",
         Callback = function()
             local espScriptURL = "https://raw.githubusercontent.com/0BLIV1ON/esp/refs/heads/main/main.lua"
             loadAndRunScript(espScriptURL, "ESP")
@@ -88,7 +88,10 @@ if table.find(allowedGameIds, game.PlaceId) then
         Callback = function()
             -- Destroy the current GUI
             if GUI then  -- Check if GUI exists before destroying it
-                GUI:Destroy()
+               local success, err = pcall(GUI.Destroy)
+                if not success then
+                    warn("Error destroying GUI: ", err)
+                end
             end
 
             -- Reload Mercury Library
