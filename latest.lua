@@ -3,7 +3,7 @@ local allowedGameIds = {482742811, 123456789, 987654321}
 if table.find(allowedGameIds, game.PlaceId) then
     -- This game is supported, so the following scripts will run.
 
-    -- Get the Library (using loadstring as per the README)
+    -- Get the Library
     local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
 
     -- Create the GUI
@@ -29,29 +29,22 @@ if table.find(allowedGameIds, game.PlaceId) then
         end
     }
 
-    -- Add a button
+    -- Add a button to run the external script
     MainTab:Button{
-        Name = "Click Me",
-        Description = "Example Button",
+        Name = "Nameless Admin",
+        Description = "Runs Nameless Admin by ltseverydayyou",
         Callback = function()
-            -- You can add more complex functionality here
-        end
-    }
-
-    -- Add a Textbox
-    MainTab:Textbox{
-        Name = "Input",
-        Callback = function(text)
-        end
-    }
-
-    -- Add a Slider
-    MainTab:Slider{
-        Name = "Volume",
-        Default = 50,
-        Min = 0,
-        Max = 100,
-        Callback = function(value)
+            local success, script = pcall(game:HttpGet, "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua")
+            if success then
+                local loadSuccess, func = pcall(loadstring, script)
+                if loadSuccess and func then
+                    func() -- Execute the loaded script
+                else
+                    warn("Error loading admin script:", loadSuccess)
+                end
+            else
+                warn("Error getting admin script:", success)
+            end
         end
     }
 
