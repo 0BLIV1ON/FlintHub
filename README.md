@@ -7,9 +7,10 @@ A Roblox UI library using Mercury Lib, designed for specific games to provide en
 ## Usage
 Once the script is set up, the UI will automatically appear when a player joins a supported game.
 
-## Contributing
-Feel free to submit pull requests with bug fixes or new features.
-Please follow the existing code style.
+## Loadstring
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/0BLIV1ON/FlintHub/refs/heads/main/latest.lua"))()
+```
 
 ## Issues
 Please report any issues on the [Issues](https://github.com/OBLIV1ON/FlintHub/issues) page.
