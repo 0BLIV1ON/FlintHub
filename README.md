@@ -2,9 +2,7 @@
 A Roblox UI library using Mercury Lib, designed for specific games to provide enhanced functionality.
 
 ## Supported Games
-    * Be Crushed by a Speeding Wall! - 482742811
-    * 
-    * 
+**Be Crushed by a Speeding Wall! - 482742811**
 
 ## Prerequisites
 [Mercury Lib](https://github.com/deeeity/mercury-lib) (This library is required to run this UI)
