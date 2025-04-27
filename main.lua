@@ -87,14 +87,22 @@ if table.find(allowedGameIds, game.PlaceId) then
         Description = "Reloads the Flint Hub and all scripts",
         Callback = function()
             -- Destroy the current GUI
-            GUI:Destroy()
+            if GUI then  -- Check if GUI exists before destroying it
+                GUI:Destroy()
+            end
 
             -- Reload Mercury Library
-            Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))()
-            if not Mercury then
-                warn("Failed to reload Mercury library!")
-                return  -- Stop if Mercury fails to load
+            local getSuccess, Mercury = pcall(loadstring, game:HttpGet("https://raw.githubusercontent.com/deeeity/mercury-lib/master/src.lua"))
+            if getSuccess then
+                if not Mercury then
+                    warn("Failed to reload Mercury library - loadstring returned nil!")
+                    return
+                end
+            else
+                warn("Failed to reload Mercury library! game:HttpGet error:", Mercury)
+                return
             end
+
 
             -- Re-create the GUI
             GUI = Mercury:Create{
@@ -111,7 +119,7 @@ if table.find(allowedGameIds, game.PlaceId) then
             }
 
             --Re-create Notification
-             GUI:Notification{
+            GUI:Notification{
                 Title = "🎉 Flint Hub Reloaded! 🎉",
                 Text = "",
                 Duration = 5,
@@ -122,7 +130,7 @@ if table.find(allowedGameIds, game.PlaceId) then
             -- Re-add buttons
             MainTab:Button{
                 Name = "Nameless Admin",
-                Description = "Runs Nameless Admin by ltseverydayyou",
+                Description = "Run Nameless Admin",
                 Callback = function()
                     local adminScriptURL = "https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/Source.lua"
                     loadAndRunScript(adminScriptURL, "Nameless Admin")
@@ -131,7 +139,7 @@ if table.find(allowedGameIds, game.PlaceId) then
 
             MainTab:Button{
                 Name = "Infinite Yield",
-                Description = "Runs Infinite Yield by EdgeIY",
+                Description = "Run Infinite Yield",
                 Callback = function()
                     local infiniteYieldURL = "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"
                     loadAndRunScript(infiniteYieldURL, "Infinite Yield")
@@ -140,7 +148,7 @@ if table.find(allowedGameIds, game.PlaceId) then
 
             MainTab:Button{
                 Name = "ESP",
-                Description = "Runs ESP script by 0BLIV1ON",
+                Description = "Run ESP (tracers and boxes)",
                 Callback = function()
                     local espScriptURL = "https://raw.githubusercontent.com/0BLIV1ON/esp/refs/heads/main/main.lua"
                     loadAndRunScript(espScriptURL, "ESP")
